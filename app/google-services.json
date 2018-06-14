@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "140060722714",
+    "firebase_url": "https://app-denunciar.firebaseio.com",
+    "project_id": "app-denunciar",
+    "storage_bucket": "app-denunciar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140060722714:android:4879cc2f0b9a534f",
+        "android_client_info": {
+          "package_name": "com.djes.altice.appdenunciar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140060722714-ho5o7p92qes6d0pvcv8sm8s076p4a52c.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "140060722714-ho5o7p92qes6d0pvcv8sm8s076p4a52c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhcn7yHl7p250MMBbxVJ2LxKTrckpQqDc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
