@@ -8,68 +8,92 @@
     tools:context=".NewActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/lblDescripcion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="76dp"
         android:text="Descripción"
         android:textColor="#0b1d51"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/lblUbicacion" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="228dp"
-        android:layout_height="228dp"
+        android:id="@+id/btnCamera"
+        android:layout_width="311dp"
+        android:layout_height="235dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/placeholder_photo_circular" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/lblUbicacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:text="Ubicación"
         android:textColor="#0b1d51"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCamera" />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="326dp"
-        android:layout_height="96dp"
+        android:id="@+id/txtDescripcion"
+        android:layout_width="321dp"
+        android:layout_height="87dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="#ddd"
-        android:gravity="top"
         android:ems="10"
+        android:gravity="top"
+        android:hint="Escriba el hecho o delito ocurrido..."
         android:inputType="textMultiLine"
+        android:padding="10dp"
         android:textColor="#000"
+        android:textColorHint="#FFC123"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/lblDescripcion" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnPublicar"
         android:layout_width="186dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:background="#FFC123"
         android:text="Publicar Denuncia"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDescripcion" />
+
+    <TextView
+        android:id="@+id/txtUbicacion"
+        android:layout_width="317dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:background="#ddd"
+        android:padding="10dp"
+        android:textColor="#000"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblUbicacion" />
 </android.support.constraint.ConstraintLayout>
