@@ -1,6 +1,7 @@
 package com.djes.altice.appdenunciar;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -11,13 +12,16 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +30,9 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -35,9 +42,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class NewActivity extends AppCompatActivity {
 
@@ -47,7 +57,7 @@ public class NewActivity extends AppCompatActivity {
     private Button btnPublicar;
     private FusedLocationProviderClient mFusedLocationClient;
     private Location mUbicacion;
-
+    private EditText txtDescripcion;
     private TextView txtUbicacion;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -76,8 +86,8 @@ public class NewActivity extends AppCompatActivity {
 
         btnCamera = findViewById(R.id.btnCamera);
         txtUbicacion =  findViewById(R.id.txtUbicacion);
-
         btnPublicar = findViewById(R.id.btnPublicar);
+        txtDescripcion =  findViewById(R.id.txtDescripcion);
 
         btnPublicar.setOnClickListener(v->{
             FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -104,9 +114,52 @@ public class NewActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                    String PhotoUrl = storageRef.getDownloadUrl().toString();
+                    String PhotoUrl = taskSnapshot.getDownloadUrl().toString();
                     Double Latitude = mUbicacion.getLatitude();
                     Double Longitude = mUbicacion.getLongitude();
+                    GeoPoint GP = new GeoPoint(Latitude,Longitude);
+                    String Descripcion = txtDescripcion.getText().toString();
+                    String Usuario = "despinosa";
+                    Date Fecha = Calendar.getInstance().getTime();
+
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    Map<String, Object> denuncia = new HashMap<>();
+                    denuncia.put("descripcion",Descripcion);
+                    denuncia.put("ubicacion",GP);
+                    denuncia.put("photoUrl",PhotoUrl);
+                    denuncia.put("fecha",Fecha);
+                    denuncia.put("usuario",Usuario);
+
+                    db.collection("denuncias").add(denuncia)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    AlertDialog.Builder builder;
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                        builder = new AlertDialog.Builder(NewActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                                    } else {
+                                        builder = new AlertDialog.Builder(NewActivity.this);
+                                    }
+                                    builder.setTitle("Publicar Denuncia- App Denunciar")
+                                            .setMessage("Su Denuncia fue publicada Exitosamente!")
+                                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    finish();
+                                                }
+                                            })
+                                            .setIcon(android.R.drawable.ic_dialog_info)
+                                            .show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                }
+                            });
+
+
+
 
 
                 }
