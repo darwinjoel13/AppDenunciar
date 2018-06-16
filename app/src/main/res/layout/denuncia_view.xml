@@ -1,104 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="290dp"
     android:background="#fff"
+    android:id="@+id/my_denuncia"
     tools:layout_editor_absoluteY="25dp">
 
-
-    <ImageView
-        android:id="@+id/imgDenuncia"
-        android:padding="20dp"
-        android:layout_width="377dp"
-        android:layout_height="174dp"
+    <android.support.v7.widget.CardView
+        android:layout_width="384dp"
+        android:layout_height="270dp"
+        android:layout_margin="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUbicacion"
-        app:srcCompat="@drawable/placeholder_photo_circular" />
-
-    <TextView
-        android:id="@+id/txtUbicacion"
-        android:layout_width="377dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:background="#0b1d51"
-        android:gravity="center"
-        android:text="Ubicación"
-        android:textSize="10sp"
+        app:cardBackgroundColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="31dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/txtUbicacion"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtUbicacion"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/pin" />
 
-    <TextView
-        android:id="@+id/txtDescripcion"
-        android:paddingLeft="5dp"
-        android:layout_width="328dp"
-        android:layout_height="39dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="4dp"
-        android:text="Caso"
-        android:textColor="#0b1d51"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/imgShare"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgDenuncia" />
+        <ImageView
+            android:id="@+id/imgDenuncia"
+            android:layout_width="371dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="47dp"
+            android:background="#000"
+            android:padding="20dp"
+            app:srcCompat="@drawable/placeholder_photo_circular" />
 
-    <TextView
-        android:id="@+id/txtFecha"
-        android:paddingLeft="5dp"
-        android:layout_width="328dp"
-        android:layout_height="14dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:text="Fecha"
-        android:textColor="#0b1d51"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/imgShare"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescripcion" />
+        <ImageView
+            android:id="@+id/imgShare"
+            android:layout_width="60dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="110dp"
+            app:srcCompat="@drawable/share" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="381dp"
-        android:layout_height="1dp"
-        android:layout_marginEnd="8dp"
-        android:background="#777"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgDenuncia" />
+        <TextView
+            android:id="@+id/txtUbicacion"
+            android:layout_width="369dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:background="#0b1d51"
+            android:gravity="center"
+            android:text="Ubicación"
+            android:textSize="10sp" />
 
-    <ImageView
-        android:id="@+id/imgShare"
-        android:layout_width="49dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.99"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgDenuncia"
-        app:srcCompat="@drawable/share" />
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/imgPin"
+            android:layout_width="31dp"
+            android:layout_height="38dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/pin" />
+
+        <TextView
+            android:id="@+id/txtDescripcion"
+            android:layout_width="367dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="210dp"
+            android:paddingLeft="5dp"
+            android:text="Caso"
+            android:textColor="#0b1d51"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txtFecha"
+            android:layout_width="367dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="248dp"
+            android:paddingLeft="5dp"
+            android:text="Fecha"
+
+            android:textColor="#0b1d51"
+            android:textSize="12sp" />
+
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

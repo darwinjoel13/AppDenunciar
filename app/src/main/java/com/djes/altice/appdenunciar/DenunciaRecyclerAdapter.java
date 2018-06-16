@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.media.Image;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,10 +16,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -64,45 +67,45 @@ public class DenunciaRecyclerAdapter extends RecyclerView.Adapter<DenunciaRecycl
 
         private TextView txtUbicacion;
         private TextView txtDescripcion;
+        private TextView txtFecha;
         private ImageView imgDenuncia;
+        private ImageView imgShare;
+        private ImageView imgPin;
         private Context _context;
         public MyRecycleItemViewHolder(View itemView, List<Denuncia> items,Context context)
         {
             super(itemView);
             txtUbicacion = (TextView) itemView.findViewById(R.id.txtUbicacion);
             txtDescripcion = (TextView) itemView.findViewById(R.id.txtDescripcion);
+            txtFecha = (TextView) itemView.findViewById(R.id.txtFecha);
+            imgShare = (ImageView) itemView.findViewById(R.id.imgShare);
+            imgPin = (ImageView) itemView.findViewById(R.id.imgPin);
             imgDenuncia = (ImageView) itemView.findViewById(R.id.imgDenuncia);
             _context=context;
         }
 
         public void bind(Denuncia item) {
-            FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(_context);
-            String Ubicacion="";
-            if (ContextCompat.checkSelfPermission( _context, android.Manifest.permission.ACCESS_COARSE_LOCATION ) == PackageManager.PERMISSION_GRANTED ) {
-                mFusedLocationClient.getLastLocation()
-                        .addOnSuccessListener((Activity) _context, new OnSuccessListener<Location>() {
-                            @Override
-                            public void onSuccess(Location location) {
-                                // Got last known location. In some rare situations this can be null.
-                                if (location != null) {
                                     Geocoder geocoder = new Geocoder(_context, Locale.getDefault());
                                     try {
                                         List<Address> addresses = geocoder.getFromLocation(item.getUbicacion().getLatitude(), item.getUbicacion().getLongitude(), 1);
                                         Address obj = addresses.get(0);
+                                        SimpleDateFormat SDF = new SimpleDateFormat("dd 'de' MMMM 'del' yyyy 'a las' HH:mm", Locale.getDefault());
                                         txtUbicacion.setText(obj.getSubLocality()+", "+obj.getLocality()+", "+obj.getCountryName());
+                                        txtDescripcion.setText("Caso: "+item.getDescripcion());
+                                        txtFecha.setText("Fecha: "+SDF.format(item.getFecha()));
+                                        imgShare.setImageResource(R.drawable.share);
+                                        imgPin.setImageResource(R.drawable.pin);
+
+
+                                        Glide.with(_context).load(item.getPhotoUrl())
+                                                .apply(new RequestOptions()
+                                                        .override(340,160).fitCenter())
+                                                .into(imgDenuncia);
                                     }
                                     catch(Exception e)
                                     {
                                         e.printStackTrace();
                                     }
-                                }
-                            }
-                        });
-            }
-
-            txtDescripcion.setText(item.getDescripcion());
-            Glide.with(_context).load(item.getPhotoUrl())
-                    .into(imgDenuncia);
         }
     }
 

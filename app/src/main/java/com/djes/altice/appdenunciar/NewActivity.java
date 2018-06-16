@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.location.Address;
 import android.location.Geocoder;
@@ -59,6 +61,7 @@ public class NewActivity extends AppCompatActivity {
     private Location mUbicacion;
     private EditText txtDescripcion;
     private TextView txtUbicacion;
+    private Bitmap Image;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -75,6 +78,7 @@ public class NewActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Image = imageBitmap;
             btnCamera.setImageBitmap(imageBitmap);
         }
     }
@@ -99,9 +103,17 @@ public class NewActivity extends AppCompatActivity {
             // Get the data from an ImageView as bytes
             btnCamera.setDrawingCacheEnabled(true);
             btnCamera.buildDrawingCache();
-            Bitmap bitmap = ((BitmapDrawable) btnCamera.getDrawable()).getBitmap();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            if(Image==null)
+            {
+                Drawable drawable = getResources().getDrawable( R.drawable.no_image);
+                Bitmap mutableBitmap = Bitmap.createBitmap(340, 160, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(mutableBitmap);
+                drawable.setBounds(0, 0, 340, 160);
+                drawable.draw(canvas);
+                Image = mutableBitmap;
+            }
+            Image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] data = baos.toByteArray();
 
             UploadTask uploadTask = denunciaRef.putBytes(data);
